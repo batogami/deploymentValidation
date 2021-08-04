@@ -9,7 +9,6 @@ public class Miid {
 
     public Miid(String id)
     {
-        //TODO: call san check and throw exception if it fails
         String[] miidValues = parseMiid(id);
         this.sn = miidValues[0];
         this.vn = miidValues[1];
@@ -22,16 +21,49 @@ public class Miid {
      * @param id The string containing the properties of an MIID.
      * @return An Array contain all properties.
      */
-    //TODO: implement Parser
     public String[] parseMiid(String id) {
-        return new String[0];
+
+        String sn;
+        String vn;
+        String va = "";
+        String t = "";
+
+        if(!sanityCheck(id))
+            return new String[4];
+
+        String[] snSplit = id.split("/");
+
+        sn = snSplit[0];
+        String workingString = snSplit[1];
+
+        if(workingString.contains("/")) {
+            String[] vnSplit = workingString.split("/");
+            vn = vnSplit[0];
+
+            workingString = vnSplit[1];
+            String[] tSplit =workingString.split("%");
+            va = tSplit[0];
+            t = tSplit[1];
+
+        }
+        else
+        {
+            String[] tSplit =workingString.split("%");
+            vn = tSplit[0];
+            t = tSplit[1].substring(0, tSplit.length -2);
+        }
+
+        return new String[] {sn, vn, va, t};
     }
 
     @Override
-    //TODO: implement toString
     public String toString()
     {
-        return null;
+        String s = this.sn + "/" + this.vn;
+        if(!this.va.equals(""))
+            s = s.concat("/"+ va);
+        s = s.concat("%"+this.time+"s");
+        return s;
     }
 
     /**
@@ -48,9 +80,26 @@ public class Miid {
      * @param miid The string to check.
      * @return True if the string can be parsed.
      */
-    //TODO: implement sanityCheck
     public boolean sanityCheck(String miid)
     {
-        return false;
+        if(!miid.contains("%"))
+            return false;
+        if(!miid.endsWith("s"))
+            return false;
+        int counter = countSlash(miid);
+        if(counter < 1 || counter > 3)
+            return false;
+        if(miid.contains("+") || miid.contains("(") || miid.contains(")"))
+            return false;
+        return true;
+    }
+
+    private int countSlash(String miid) {
+        int count = 0;
+        for (char c:miid.toCharArray()) {
+            if(c == '/')
+                count++;
+        }
+        return count;
     }
 }
