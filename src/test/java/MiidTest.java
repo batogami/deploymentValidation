@@ -5,18 +5,107 @@ import static org.junit.jupiter.api.Assertions.*;
 class MiidTest {
 
     @Test
-    void parseMiid() {
+    void
+    RegularInputSimpleNumber() {
     }
 
     @Test
-    void testToString() {
+    void
+    RegularInputSimpleVersion() {
     }
 
     @Test
-    void setEpoch() {
+    void
+    RegularInputComplexNumber() {
     }
 
     @Test
-    void sanityCheck() {
+    void
+    RegularInputComplexVersion() {
+    }
+
+    @Test
+    void
+    NoneLatinCharacter() {
+    }
+
+    @Test
+    void
+    RegularInputTime() {
+    }
+
+    @Test
+    void
+    RegularInputTimeUnkownService() {
+    }
+
+    @Test
+    void
+    NegativeTimeValue() {
+    }
+
+    @Test
+    void
+    TimeValueNotANumber() {
+    }
+
+    @Test
+    void
+    LongServiceName() {
+    }
+
+    @Test
+    void
+    VeryLongServiceName() {
+    }
+
+    @Test
+    void
+    RegularInputAdditionalInfo() {
+    }
+
+    @Test
+    void
+    RegularInputAdditionalInfoSpecialChar() {
+    }
+
+    @Test
+    void
+    EmptyAdditionalInformation() {
+    }
+
+    @Test
+    void
+    EmptyServiceName() {
+    }
+
+    @Test
+    void
+    EmptyVersion() {
+    }
+
+    @Test
+    void
+    MissingSeparationCharSlash() {
+    }
+
+    @Test
+    void
+    MissingSeparationCharProcent() {
+    }
+
+    @Test
+    void
+    ServiceNameWithSeparationChar() {
+    }
+
+    @Test
+    void
+    LongAdditionalInfo() {
+    }
+
+    @Test
+    void
+    VeryLongAdditionalInfo() {
     }
 }

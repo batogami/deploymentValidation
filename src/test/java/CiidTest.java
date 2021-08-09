@@ -2,23 +2,61 @@ import org.junit.jupiter.api.Test;
 
 class CiidTest {
 
+    //Start testplan tests
     @Test
-    void parseCiid() {
+    void
+    singleCIIDRegularInput() {
     }
 
     @Test
-    void separateNameFromArg() {
+    void
+    RegularInputWithDepthOne() {
     }
 
     @Test
-    void parseArguments() {
+    void
+    RegularInputWithDepthTwo() {
     }
 
     @Test
-    void spiltOnPlus() {
+    void
+    RegularInputWithBreadthTwo() {
     }
 
     @Test
-    void testToString() {
+    void
+    RegularInputWithBreadthTwoDepthTwo() {
     }
+
+    @Test
+    void
+    InvalidTimeInput() {
+    }
+
+    @Test
+    void
+    InvalidApplicationInfoInput() {
+    }
+
+    @Test
+    void
+    InvalidSpecialCharacterInput() {
+    }
+
+    @Test
+    void
+    InvalidChildInput() {
+    }
+
+    @Test
+    void
+    WrongConcatination() {
+    }
+
+    @Test
+    void
+    setValidEpoch() {
+    }
+
+    //End testplan tests
 }

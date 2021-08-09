@@ -5,10 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class HtmlParserTest {
 
     @Test
-    void externalServiceToStringParser() {
+    void
+    externalServiceToStringParser() {
     }
 
     @Test
-    void externalServiceToCiidParser() {
+    void
+    externalServiceToCiidParser() {
+    }
+
+    @Test
+    void
+    externalServiceToCiidParserFail() {
+    }
+
+    @Test
+    void
+    externalServiceToStringParserFail() {
     }
 }

@@ -10,6 +10,8 @@ public class HtmlParser {
      */
     public static String externalServiceToStringParser(String name, String url)
     {
+        if (name.equals("") || url.equals(""))
+            return null;
         String base64Url = Base64.getUrlEncoder().encodeToString(url.getBytes());
         return name + "/x/"+base64Url;
     }
@@ -22,6 +24,8 @@ public class HtmlParser {
      */
     public static Ciid externalServiceToCiidParser(String name, String url)
     {
+        if (name.equals("") || url.equals(""))
+            return null;
         String ciidString = externalServiceToStringParser(name, url);
         Ciid ciid = new Ciid(ciidString);
         return ciid;
