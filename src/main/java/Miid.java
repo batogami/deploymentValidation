@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Miid {
@@ -70,9 +71,9 @@ public class Miid {
      * Set the epoch time value given a Date time
      * @param time The date time value to convert.
      */
-    public void setEpoch(Date time)
+    public void setEpoch(long time)
     {
-       this.time = time.getTime();
+       this.time = time;
     }
 
     /**
