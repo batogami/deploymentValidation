@@ -40,10 +40,10 @@ public class Ciid {
      * @return A string array with the miid as the first entry and the ciids as second
      */
     public String[] separateNameFromArg(String id) {
-        int splitIndex = id.length() -1;
+        int splitIndex = id.length();
         if (id.contains("("))
-            splitIndex = id.indexOf("C");
-        String[] ret = new String[] {id.substring(0, splitIndex), id.substring(splitIndex, id.length()-1)};
+            splitIndex = id.indexOf("(");
+        String[] ret = new String[] {id.substring(0, splitIndex), id.substring(splitIndex)};
         return ret;
     }
 
@@ -56,7 +56,7 @@ public class Ciid {
         List<Ciid> ret = new ArrayList<>();
 
         //delete ( and ) at the beginning and end
-        arg = arg.substring(1, arg.length()-2);
+        arg = arg.substring(1, arg.length()-1);
 
         String[] uids = spiltOnPlus(arg);
 
@@ -86,7 +86,7 @@ public class Ciid {
 
         if(plusPosition < bracketPosition)
         {
-            return new String[] {s.substring(0, plusPosition), s.substring(plusPosition, s.length()-1)};
+            return new String[] {s.substring(0, plusPosition), s.substring(plusPosition+1)};
         }
         return new String[]{s};
     }

@@ -13,7 +13,7 @@ public class HtmlParser {
         if (name.equals("") || url.equals(""))
             return null;
         String base64Url = Base64.getUrlEncoder().encodeToString(url.getBytes());
-        return name + "/x/"+base64Url;
+        return name + "/x/"+base64Url+"%-1s";
     }
 
     /**

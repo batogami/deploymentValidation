@@ -65,7 +65,7 @@ class CiidTest {
     @Test
     void
     RegularInputWithBreadthTwo() {
-        String depthOneTest = "MsA/0.1%123s(MsA/0.2%123s+MsA/0.3%123s))";
+        String depthOneTest = "MsA/0.1%123s(MsA/0.2%123s+MsA/0.3%123s)";
         Ciid ciid = new Ciid(depthOneTest);
         Ciid child = ciid.ciids.get(0);
         assertEquals( 2,ciid.ciids.size());
@@ -164,7 +164,7 @@ class CiidTest {
     @Test
     void
     setValidEpoch() {
-        String simpleTest = "MsA/0.1%";
+        String simpleTest = "MsA/0.1%1s";
         Ciid ciid = new Ciid(simpleTest);
         long millis = System.currentTimeMillis();
         long seconds = millis / 1000;

@@ -10,11 +10,20 @@ public class Miid {
 
     public Miid(String id)
     {
-        String[] miidValues = parseMiid(id);
-        this.sn = miidValues[0];
-        this.vn = miidValues[1];
-        this.va = miidValues[2];
-        this.time = Long.parseLong(miidValues[3]);
+        try {
+            String[] miidValues = parseMiid(id);
+            this.sn = miidValues[0];
+            this.vn = miidValues[1];
+            this.va = miidValues[2];
+            this.time = Long.parseLong(miidValues[3]);
+        }
+        catch (Exception e)
+        {
+            this.sn = "";
+            this.vn = "";
+            this.va = "";
+            this.time = -1;
+        }
     }
 
     /**
@@ -32,27 +41,29 @@ public class Miid {
         if(!sanityCheck(id))
             return new String[4];
 
-        String[] snSplit = id.split("/");
+        String[] split = id.split("/");
 
-        sn = snSplit[0];
-        String workingString = snSplit[1];
+        sn = split[0];
 
-        if(workingString.contains("/")) {
-            String[] vnSplit = workingString.split("/");
-            vn = vnSplit[0];
 
-            workingString = vnSplit[1];
+        if(split.length == 3) {
+            String workingString = split[2];
+            vn = split[1];
+
             String[] tSplit =workingString.split("%");
             va = tSplit[0];
-            t = tSplit[1];
+            t = tSplit[1].substring(0, tSplit[1].length()-1);
 
         }
-        else
+        else if(split.length == 2)
         {
+            String workingString = split[1];
             String[] tSplit =workingString.split("%");
             vn = tSplit[0];
-            t = tSplit[1].substring(0, tSplit.length -2);
+            t = tSplit[1].substring(0, tSplit[1].length()-1);
         }
+        else
+            return new String[4];
 
         return new String[] {sn, vn, va, t};
     }

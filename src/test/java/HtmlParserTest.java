@@ -11,7 +11,7 @@ class HtmlParserTest {
     externalServiceToStringParser() {
        String test =  HtmlParser.externalServiceToStringParser("TestName", "TestURl");
        String base64Url = Base64.getUrlEncoder().encodeToString("TestURl".getBytes());
-       assertEquals("TestName/x/"+base64Url,test);
+       assertEquals("TestName/x/"+base64Url+"%-1s",test);
     }
 
     @Test
@@ -19,9 +19,9 @@ class HtmlParserTest {
     externalServiceToCiidParser() {
         Ciid test =  HtmlParser.externalServiceToCiidParser("TestName", "TestURl");
         String base64Url = Base64.getUrlEncoder().encodeToString("TestURl".getBytes());
-        assertEquals(test.miid.sn, "TestName");
-        assertEquals(test.miid.va, base64Url);
-        assertEquals(test.miid.vn, "x");
+        assertEquals("TestName",test.miid.sn);
+        assertEquals(base64Url,test.miid.va);
+        assertEquals("x",test.miid.vn);
     }
 
     @Test
