@@ -16,13 +16,20 @@ public class Miid {
             this.vn = miidValues[1];
             this.va = miidValues[2];
             this.time = Long.parseLong(miidValues[3]);
+            if (time < -1)
+            {
+                this.sn = null;
+                this.vn = null;
+                this.va = null;
+                this.time = Long.MIN_VALUE;
+            }
         }
         catch (Exception e)
         {
-            this.sn = "";
-            this.vn = "";
-            this.va = "";
-            this.time = -1;
+            this.sn = null;
+            this.vn = null;
+            this.va = null;
+            this.time = Long.MIN_VALUE;
         }
     }
 
@@ -31,7 +38,7 @@ public class Miid {
      * @param id The string containing the properties of an MIID.
      * @return An Array contain all properties.
      */
-    public String[] parseMiid(String id) {
+    public String[] parseMiid(String id) throws Exception {
 
         String sn;
         String vn;
@@ -39,7 +46,7 @@ public class Miid {
         String t = "";
 
         if(!sanityCheck(id))
-            return new String[4];
+            throw new Exception("Sanity check failed");
 
         String[] split = id.split("/");
 
@@ -52,6 +59,8 @@ public class Miid {
 
             String[] tSplit =workingString.split("%");
             va = tSplit[0];
+            if(va.equals(""))
+                throw new Exception("String has va flag but it's an empty field");
             t = tSplit[1].substring(0, tSplit[1].length()-1);
 
         }
@@ -63,7 +72,11 @@ public class Miid {
             t = tSplit[1].substring(0, tSplit[1].length()-1);
         }
         else
-            return new String[4];
+            throw new Exception("Wrong string format");
+
+        if (sn.equals("") || vn.equals(""))
+            throw new Exception("Empty MIID information");
+
 
         return new String[] {sn, vn, va, t};
     }

@@ -11,6 +11,39 @@ class CiidTest {
     //Start testplan tests
     @Test
     void
+    singleToString() {
+        String simpleTest = "MsA/0.1%123s";
+        Ciid ciid = new Ciid(simpleTest);
+        assertEquals("MsA/0.1%123s",ciid.toString());
+    }
+
+    @Test
+    void
+    singleToStringWithVa() {
+        String simpleTest = "MsA/0.1/dev-ccaaffee%123s";
+        Ciid ciid = new Ciid(simpleTest);
+        assertEquals("MsA/0.1/dev-ccaaffee%123s",ciid.toString());
+    }
+
+    @Test
+    void
+    toStringWithDepthTwo() {
+        String depthOneTest = "MsA/0.1%123s(MsA/0.2%123s(MsA/0.3%123s))";
+        Ciid ciid = new Ciid(depthOneTest);
+        assertEquals( "MsA/0.1%123s(MsA/0.2%123s(MsA/0.3%123s))",ciid.toString());
+    }
+
+    @Test
+    void
+    toStringWithBreadthTwo() {
+        String depthOneTest = "MsA/0.1%123s(MsA/0.2%123s+MsA/0.3%123s)";
+        Ciid ciid = new Ciid(depthOneTest);
+        Ciid child = ciid.ciids.get(0);
+        assertEquals( "MsA/0.1%123s(MsA/0.2%123s+MsA/0.3%123s)",ciid.toString());
+    }
+
+    @Test
+    void
     singleCIIDRegularInput() {
         String simpleTest = "MsA/0.1%123s";
         Ciid ciid = new Ciid(simpleTest);
@@ -84,7 +117,7 @@ class CiidTest {
     @Test
     void
     InvalidTimeInputNegativeValue() {
-        String simpleTest = "MsA/0.1%-1s";
+        String simpleTest = "MsA/0.1%-2s";
         Ciid ciid = new Ciid(simpleTest);
         assertNull(ciid.miid);
         assertNull(ciid.ciids);
@@ -149,7 +182,7 @@ class CiidTest {
     InvalidChildInput() {
         String depthOneTest = "MsA/0.1%123s(MsA)/0.1/%123s)";
         Ciid ciid = new Ciid(depthOneTest);
-        assertEquals(0,ciid.ciids);
+        assertNull(ciid.ciids);
     }
 
     @Test

@@ -9,7 +9,8 @@ public class Ciid {
     public Ciid(String id)
     {
         List<Object> parsedValues =  parseCiid(id);
-        this.miid = (Miid) parsedValues.get(0);
+        if(parsedValues.size() > 0)
+            this.miid = (Miid) parsedValues.get(0);
         if (parsedValues.size() > 1)
             this.ciids = (List<Ciid>) parsedValues.get(1);
     }
@@ -27,10 +28,14 @@ public class Ciid {
         String name = nameArgArray[0];
         String arg = nameArgArray[1];
 
-        list.add(new Miid(name));
-        if(!arg.equals(""))
-            list.add(parseArguments(arg));
-
+        Miid miid = new Miid(name);
+        if(miid.sn != null)
+            list.add(miid);
+        if(!arg.equals("")) {
+            List<Ciid> children = parseArguments(arg);
+            if(children.get(0).miid != null)
+                list.add(children);
+        }
         return list;
     }
 
@@ -101,8 +106,8 @@ public class Ciid {
         } else if (ciids != null && ciids.size() > 1)
         {
             ret = ret.concat("(");
-            String ciidsString = "";
-            for (int i = 0; i< ciids.size(); i++)
+            String ciidsString = ciids.get(0).toString();
+            for (int i = 1; i< ciids.size(); i++)
             {
                 ciidsString = ciidsString.concat("+" + ciids.get(i).toString());
             }
