@@ -106,6 +106,38 @@ class CiidTest {
 
     @Test
     void
+    RegularInputWithBreadthThree() {
+        String depthThreeTest = "MsA/0.1%123s(MsA/0.2%123s+MsA/0.3%123s+MsA/0.4%123s)";
+
+        Ciid ciid = new Ciid(depthThreeTest);
+
+        assertEquals( 3,ciid.ciids.size());
+
+        Ciid child1 = ciid.ciids.get(0);
+        Ciid child2 = ciid.ciids.get(1);
+        Ciid child3 = ciid.ciids.get(2);
+
+
+        assertEquals("MsA",ciid.miid.sn);
+        assertEquals("0.1",ciid.miid.vn);
+        assertEquals(123,ciid.miid.time);
+
+        assertEquals("MsA",child1.miid.sn);
+        assertEquals("0.2",child1.miid.vn);
+        assertEquals(123,child1.miid.time);
+
+        assertEquals("MsA",child2.miid.sn);
+        assertEquals("0.3",child2.miid.vn);
+        assertEquals(123,child2.miid.time);
+
+        assertEquals("MsA",child3.miid.sn);
+        assertEquals("0.4",child3.miid.vn);
+        assertEquals(123,child3.miid.time);
+    }
+
+
+    @Test
+    void
     RegularInputWithBreadthTwoDepthTwo() {
         String depthOneTest = "MsA/0.1%123s(MsA/0.2%123s(MsA/0.3%123s+MsA/0.4%123s))";
         Ciid ciid = new Ciid(depthOneTest);
@@ -127,15 +159,6 @@ class CiidTest {
     void
     InvalidTimeInputChar() {
         String simpleTest = "MsA/0.1%xs";
-        Ciid ciid = new Ciid(simpleTest);
-        assertNull(ciid.miid);
-        assertNull(ciid.ciids);
-    }
-
-    @Test
-    void
-    InvalidApplicationInfoInput() {
-        String simpleTest = "MsA/0.1/%123s";
         Ciid ciid = new Ciid(simpleTest);
         assertNull(ciid.miid);
         assertNull(ciid.ciids);

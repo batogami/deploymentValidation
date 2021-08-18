@@ -59,8 +59,6 @@ public class Miid {
 
             String[] tSplit =workingString.split("%");
             va = tSplit[0];
-            if(va.equals(""))
-                throw new Exception("String has va flag but it's an empty field");
             t = tSplit[1].substring(0, tSplit[1].length()-1);
 
         }

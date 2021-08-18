@@ -63,7 +63,7 @@ public class Ciid {
         //delete ( and ) at the beginning and end
         arg = arg.substring(1, arg.length()-1);
 
-        String[] uids = spiltOnPlus(arg);
+        String[] uids = spiltOnPlus(arg).toArray(new String[0]);
 
         for (String uid: uids) {
             ret.add(new Ciid(uid));
@@ -76,24 +76,30 @@ public class Ciid {
      * @param s A string to parse
      * @return If the string contains a plus before a bracket it is split there which is the return value. Else the string itself will be returned.
      */
-    public String[] spiltOnPlus(String s) {
+    public List<String> spiltOnPlus(String s) {
 
         int plusPosition = -1;
         int bracketPosition = Integer.MAX_VALUE;
+        List<String> ret = new ArrayList<>();
 
         if(s.contains("+"))
             plusPosition = s.indexOf("+");
-        else
-            return new String[] {s};
-
+        else {
+            ret.add(s);
+            return ret;
+        }
         if(s.contains("("))
             bracketPosition = s.indexOf("(");
 
         if(plusPosition < bracketPosition)
         {
-            return new String[] {s.substring(0, plusPosition), s.substring(plusPosition+1)};
+            String workingString = s.substring(plusPosition+1);
+            ret.add(s.substring(0, plusPosition));
+            ret.addAll(spiltOnPlus(workingString));
+            return ret;
         }
-        return new String[]{s};
+        ret.add(s);
+        return ret;
     }
 
     @Override
